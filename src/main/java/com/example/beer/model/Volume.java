@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Volume implements Serializable {
-    private Float value;
-    private String unit;
+    public Float value;
+    public String unit;
 }

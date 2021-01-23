@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Ingredient implements Serializable {
-    private List<Malt> malt;
+    private List<Malt> malts;
     private List<Hop> hops;
     private String yeast;
 

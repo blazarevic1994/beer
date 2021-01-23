@@ -1,9 +1,9 @@
 package com.example.beer.entity;
 
-import com.example.beer.model.Fermentation;
-import com.example.beer.model.MashTemp;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
 @Entity
 public class BeerEntity {
     @Id
@@ -50,7 +51,7 @@ public class BeerEntity {
             mappedBy = "beerEntity",
             cascade = CascadeType.ALL
     )
-    private List<FoodPairEntity> food_pairing;
+    private List<FoodPairEntity> foods;
 
     private String brewers_tips;
     private String contributed_by;
