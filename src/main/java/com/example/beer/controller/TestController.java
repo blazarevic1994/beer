@@ -1,7 +1,9 @@
 package com.example.beer.controller;
 
 import com.example.beer.entity.BeerEntity;
+import com.example.beer.entity.FoodPairEntity;
 import com.example.beer.mapper.BeerMapper;
+import com.example.beer.mapper.FoodPairMapper;
 import com.example.beer.model.Beer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,8 @@ import java.util.List;
 public class TestController {
     @Autowired
     private  BeerMapper beerMapper;
+    @Autowired
+    private FoodPairMapper foodPairMapper;
 
     private List<Beer> beers = new ArrayList<>();
 
@@ -25,9 +29,11 @@ public class TestController {
     }
     @PostMapping("/beer")
     public void addBeer(@RequestBody List<Beer> beer){
-//        BeerEntity beerEntity = beerMapper.maptoDto(beer.get(0));
+        BeerEntity beerEntity = beerMapper.maptoDto(beer.get(0));
+        FoodPairEntity foodPairEntity = foodPairMapper.maptoDto(beer.get(0).getFood_pairing().get(0));
 
-     //   System.out.println(beerEntity);
+        System.out.println(beerEntity);
+        System.out.println(foodPairEntity);
         //beers.add(beer.get(0));
 
     }

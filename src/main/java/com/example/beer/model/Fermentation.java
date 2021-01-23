@@ -1,12 +1,25 @@
 package com.example.beer.model;
 
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.io.Serializable;
 
-@Getter
-@Setter
+
 public class Fermentation implements Serializable {
     private Temperature temp;
+
+    public Temperature getTemp() {
+        return temp;
+    }
+
+    public void setTemp(Temperature temp) {
+        this.temp = temp;
+    }
+
+    @Override
+    public String toString() {
+        return "Fermentation{" +
+                "temp=" + temp +
+                '}';
+    }
 }

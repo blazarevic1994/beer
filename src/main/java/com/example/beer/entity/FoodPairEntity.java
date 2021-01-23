@@ -1,12 +1,9 @@
 package com.example.beer.entity;
 
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+
 @Entity
 public class FoodPairEntity {
 
@@ -18,4 +15,37 @@ public class FoodPairEntity {
     private BeerEntity beerEntity;
 
     private String value;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public BeerEntity getBeerEntity() {
+        return beerEntity;
+    }
+
+    public void setBeerEntity(BeerEntity beerEntity) {
+        this.beerEntity = beerEntity;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "FoodPairEntity{" +
+                "id=" + id +
+                ", beerEntity=" + beerEntity +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

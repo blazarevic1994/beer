@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface HopMapper {
 
-    @Mapping(target = "amount_value", source = "amount.value")
-    @Mapping(target = "amount_unit", source = "amount.unit")
-    HopEntity maptoDto(Hop hop, Amount amount);
+    @Mapping(target = "amount_value", source = "hop.amount.value")
+    @Mapping(target = "amount_unit", source = "hop.amount.unit")
+    HopEntity maptoDto(Hop hop);
 }

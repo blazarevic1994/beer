@@ -1,13 +1,9 @@
 package com.example.beer.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
+
 @Entity
 public class IngredientsEntity {
 
@@ -33,6 +29,54 @@ public class IngredientsEntity {
     private String yeast;
 
 
-    
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public BeerEntity getBeerEntity() {
+        return beerEntity;
+    }
+
+    public void setBeerEntity(BeerEntity beerEntity) {
+        this.beerEntity = beerEntity;
+    }
+
+    public List<MaltEntity> getMalts() {
+        return malts;
+    }
+
+    public void setMalts(List<MaltEntity> malts) {
+        this.malts = malts;
+    }
+
+    public List<HopEntity> getHops() {
+        return hops;
+    }
+
+    public void setHops(List<HopEntity> hops) {
+        this.hops = hops;
+    }
+
+    public String getYeast() {
+        return yeast;
+    }
+
+    public void setYeast(String yeast) {
+        this.yeast = yeast;
+    }
+
+    @Override
+    public String toString() {
+        return "IngredientsEntity{" +
+                "id=" + id +
+                ", beerEntity=" + beerEntity +
+                ", malts=" + malts +
+                ", hops=" + hops +
+                ", yeast='" + yeast + '\'' +
+                '}';
+    }
 }

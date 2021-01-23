@@ -1,14 +1,11 @@
 package com.example.beer.entity;
 
 
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Getter
-@Setter
+
 @Entity
 public class MethodEntity {
 
@@ -35,5 +32,54 @@ public class MethodEntity {
     private String twist;
 
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public BeerEntity getBeerEntity() {
+        return beerEntity;
+    }
+
+    public void setBeerEntity(BeerEntity beerEntity) {
+        this.beerEntity = beerEntity;
+    }
+
+    public List<MashTempEntity> getMashTemps() {
+        return mashTemps;
+    }
+
+    public void setMashTemps(List<MashTempEntity> mashTemps) {
+        this.mashTemps = mashTemps;
+    }
+
+    public FermentationEntity getFermentation() {
+        return fermentation;
+    }
+
+    public void setFermentation(FermentationEntity fermentation) {
+        this.fermentation = fermentation;
+    }
+
+    public String getTwist() {
+        return twist;
+    }
+
+    public void setTwist(String twist) {
+        this.twist = twist;
+    }
+
+    @Override
+    public String toString() {
+        return "MethodEntity{" +
+                "id=" + id +
+                ", beerEntity=" + beerEntity +
+                ", mashTemps=" + mashTemps +
+                ", fermentation=" + fermentation +
+                ", twist='" + twist + '\'' +
+                '}';
+    }
 }
