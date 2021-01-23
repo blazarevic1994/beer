@@ -18,7 +18,7 @@ public class IngredientsEntity {
             mappedBy = "ingredientsEntity",
             cascade = CascadeType.ALL
     )
-    private List<MaltEntity> malts;
+    private List<MaltEntity> malt;
 
     @OneToMany(
             mappedBy = "ingredientsEntity",
@@ -45,12 +45,12 @@ public class IngredientsEntity {
         this.beerEntity = beerEntity;
     }
 
-    public List<MaltEntity> getMalts() {
-        return malts;
+    public List<MaltEntity> getMalt() {
+        return malt;
     }
 
-    public void setMalts(List<MaltEntity> malts) {
-        this.malts = malts;
+    public void setMalt(List<MaltEntity> malt) {
+        this.malt = malt;
     }
 
     public List<HopEntity> getHops() {
@@ -74,7 +74,7 @@ public class IngredientsEntity {
         return "IngredientsEntity{" +
                 "id=" + id +
                 ", beerEntity=" + beerEntity +
-                ", malts=" + malts +
+                ", malt=" + malt +
                 ", hops=" + hops +
                 ", yeast='" + yeast + '\'' +
                 '}';

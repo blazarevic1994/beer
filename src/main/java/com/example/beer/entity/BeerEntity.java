@@ -15,6 +15,7 @@ public class BeerEntity {
     private String name;
     private String tagline;
     private Date first_brewed;
+    @Column(length = 1024)
     private String description;
     private String image_url;
     private Float abv;

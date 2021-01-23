@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-23T17:07:42+0100",
+    date = "2021-01-23T20:22:48+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_275 (Private Build)"
 )
 @Component
@@ -27,7 +27,7 @@ public class IngredientsMapperImpl implements IngredientsMapper {
 
         IngredientsEntity ingredientsEntity = new IngredientsEntity();
 
-        ingredientsEntity.setMalts( maltListToMaltEntityList( ingredient.getMalts() ) );
+        ingredientsEntity.setMalt( maltListToMaltEntityList( ingredient.getMalt() ) );
         ingredientsEntity.setHops( hopListToHopEntityList( ingredient.getHops() ) );
         ingredientsEntity.setYeast( ingredient.getYeast() );
 

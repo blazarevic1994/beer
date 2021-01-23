@@ -7,16 +7,16 @@ import java.util.List;
 
 
 public class Ingredient implements Serializable {
-    private List<Malt> malts;
+    private List<Malt> malt;
     private List<Hop> hops;
     private String yeast;
 
-    public List<Malt> getMalts() {
-        return malts;
+    public List<Malt> getMalt() {
+        return malt;
     }
 
-    public void setMalts(List<Malt> malts) {
-        this.malts = malts;
+    public void setMalt(List<Malt> malt) {
+        this.malt = malt;
     }
 
     public List<Hop> getHops() {
@@ -38,7 +38,7 @@ public class Ingredient implements Serializable {
     @Override
     public String toString() {
         return "Ingredient{" +
-                "malts=" + malts +
+                "malt=" + malt +
                 ", hops=" + hops +
                 ", yeast='" + yeast + '\'' +
                 '}';
