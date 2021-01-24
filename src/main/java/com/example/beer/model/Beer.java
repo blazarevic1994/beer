@@ -11,7 +11,7 @@ public class Beer implements Serializable {
     private Integer id;
     private String name;
     private String tagline;
-    private Date first_brewed;
+    private String first_brewed;
     private String description;
     private String image_url;
     private Float abv;
@@ -54,11 +54,11 @@ public class Beer implements Serializable {
         this.tagline = tagline;
     }
 
-    public Date getFirst_brewed() {
+    public String getFirst_brewed() {
         return first_brewed;
     }
 
-    public void setFirst_brewed(Date first_brewed) {
+    public void setFirst_brewed(String first_brewed) {
         this.first_brewed = first_brewed;
     }
 

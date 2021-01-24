@@ -8,12 +8,14 @@ import com.example.beer.model.BoilVolume;
 import com.example.beer.model.Fermentation;
 import com.example.beer.model.Method;
 import com.example.beer.model.Volume;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-23T20:22:48+0100",
+    date = "2021-01-24T20:28:55+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_275 (Private Build)"
 )
 @Component
@@ -28,13 +30,20 @@ public class BeerMapperImpl implements BeerMapper {
         BeerEntity beerEntity = new BeerEntity();
 
         beerEntity.setVolume_value( beerVolumeValue( beer ) );
+        try {
+            if ( beer.getFirst_brewed() != null ) {
+                beerEntity.setFirst_brewed( new SimpleDateFormat( "dd/MM/yyyy" ).parse( beer.getFirst_brewed() ) );
+            }
+        }
+        catch ( ParseException e ) {
+            throw new RuntimeException( e );
+        }
         beerEntity.setBoil_volume_value( beerBoil_volumeValue( beer ) );
         beerEntity.setBoil_volume_unit( beerBoil_volumeUnit( beer ) );
         beerEntity.setVolume_unit( beerVolumeUnit( beer ) );
         beerEntity.setId( beer.getId() );
         beerEntity.setName( beer.getName() );
         beerEntity.setTagline( beer.getTagline() );
-        beerEntity.setFirst_brewed( beer.getFirst_brewed() );
         beerEntity.setDescription( beer.getDescription() );
         beerEntity.setImage_url( beer.getImage_url() );
         beerEntity.setAbv( beer.getAbv() );

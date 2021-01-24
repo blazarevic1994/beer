@@ -12,6 +12,7 @@ public class MashTempEntity {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "methodEntity", referencedColumnName = "id")
     private MethodEntity methodEntity;
 
     private Float temp_value;
@@ -62,7 +63,6 @@ public class MashTempEntity {
     public String toString() {
         return "MashTempEntity{" +
                 "id=" + id +
-                ", methodEntity=" + methodEntity +
                 ", temp_value=" + temp_value +
                 ", temp_unit='" + temp_unit + '\'' +
                 ", duration=" + duration +

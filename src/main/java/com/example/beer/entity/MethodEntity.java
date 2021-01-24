@@ -15,6 +15,7 @@ public class MethodEntity {
 
 
     @OneToOne
+    @JoinColumn(name = "beerEntity", referencedColumnName = "id")
     private BeerEntity beerEntity;
 
     @OneToMany(
@@ -76,7 +77,6 @@ public class MethodEntity {
     public String toString() {
         return "MethodEntity{" +
                 "id=" + id +
-                ", beerEntity=" + beerEntity +
                 ", mashTemps=" + mashTemps +
                 ", fermentation=" + fermentation +
                 ", twist='" + twist + '\'' +

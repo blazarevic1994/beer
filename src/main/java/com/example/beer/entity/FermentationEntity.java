@@ -10,7 +10,9 @@ public class FermentationEntity {
     private Integer id;
 
     @OneToOne
+    @JoinColumn(name = "methodEntity", referencedColumnName = "id")
     private MethodEntity methodEntity;
+
     private Float temp_value;
     private String temp_unit;
 
@@ -50,7 +52,6 @@ public class FermentationEntity {
     public String toString() {
         return "FermentationEntity{" +
                 "id=" + id +
-                ", methodEntity=" + methodEntity +
                 ", temp_value=" + temp_value +
                 ", temp_unit='" + temp_unit + '\'' +
                 '}';

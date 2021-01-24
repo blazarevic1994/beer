@@ -1,5 +1,6 @@
 package com.example.beer.mapper;
 
+import com.example.beer.entity.IngredientsEntity;
 import com.example.beer.entity.MaltEntity;
 import com.example.beer.model.Amount;
 import com.example.beer.model.Malt;
@@ -8,23 +9,28 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-23T20:22:47+0100",
+    date = "2021-01-24T20:28:55+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_275 (Private Build)"
 )
 @Component
 public class MaltMapperImpl implements MaltMapper {
 
     @Override
-    public MaltEntity maptoDto(Malt malt) {
-        if ( malt == null ) {
+    public MaltEntity maptoDto(Malt malt, IngredientsEntity ingredientsEntity) {
+        if ( malt == null && ingredientsEntity == null ) {
             return null;
         }
 
         MaltEntity maltEntity = new MaltEntity();
 
-        maltEntity.setAmount_unit( maltAmountUnit( malt ) );
-        maltEntity.setAmount_value( maltAmountValue( malt ) );
-        maltEntity.setName( malt.getName() );
+        if ( malt != null ) {
+            maltEntity.setAmount_unit( maltAmountUnit( malt ) );
+            maltEntity.setAmount_value( maltAmountValue( malt ) );
+            maltEntity.setName( malt.getName() );
+        }
+        if ( ingredientsEntity != null ) {
+            maltEntity.setIngredientsEntity( ingredientsEntity );
+        }
 
         return maltEntity;
     }

@@ -1,6 +1,7 @@
 package com.example.beer.mapper;
 
 import com.example.beer.entity.MashTempEntity;
+import com.example.beer.entity.MethodEntity;
 import com.example.beer.model.MashTemp;
 import com.example.beer.model.Temperature;
 import javax.annotation.Generated;
@@ -8,23 +9,28 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2021-01-23T20:22:48+0100",
+    date = "2021-01-24T20:28:55+0100",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 1.8.0_275 (Private Build)"
 )
 @Component
 public class MashMapperImpl implements MashMapper {
 
     @Override
-    public MashTempEntity maptoDto(MashTemp mashTemp) {
-        if ( mashTemp == null ) {
+    public MashTempEntity maptoDto(MashTemp mashTemp, MethodEntity me) {
+        if ( mashTemp == null && me == null ) {
             return null;
         }
 
         MashTempEntity mashTempEntity = new MashTempEntity();
 
-        mashTempEntity.setTemp_value( mashTempTempValue( mashTemp ) );
-        mashTempEntity.setTemp_unit( mashTempTempUnit( mashTemp ) );
-        mashTempEntity.setDuration( mashTemp.getDuration() );
+        if ( mashTemp != null ) {
+            mashTempEntity.setTemp_value( mashTempTempValue( mashTemp ) );
+            mashTempEntity.setTemp_unit( mashTempTempUnit( mashTemp ) );
+            mashTempEntity.setDuration( mashTemp.getDuration() );
+        }
+        if ( me != null ) {
+            mashTempEntity.setMethodEntity( me );
+        }
 
         return mashTempEntity;
     }

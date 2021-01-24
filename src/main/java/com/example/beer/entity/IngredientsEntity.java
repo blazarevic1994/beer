@@ -12,6 +12,7 @@ public class IngredientsEntity {
     private Integer id;
 
     @OneToOne
+    @JoinColumn(name = "beerEntity", referencedColumnName = "id")
     private BeerEntity beerEntity;
 
     @OneToMany(
@@ -73,7 +74,6 @@ public class IngredientsEntity {
     public String toString() {
         return "IngredientsEntity{" +
                 "id=" + id +
-                ", beerEntity=" + beerEntity +
                 ", malt=" + malt +
                 ", hops=" + hops +
                 ", yeast='" + yeast + '\'' +

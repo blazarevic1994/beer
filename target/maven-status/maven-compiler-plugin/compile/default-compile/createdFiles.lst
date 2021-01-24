@@ -7,12 +7,14 @@ com/example/beer/jpa/BeerRepo.class
 com/example/beer/mapper/HopMapperImpl.class
 com/example/beer/mapper/MashMapper.class
 com/example/beer/model/BoilVolume.class
+com/example/beer/controller/BeerController.class
 com/example/beer/model/Fermentation.class
 com/example/beer/mapper/HopMapper.class
 com/example/beer/mapper/MethodMapper.class
 com/example/beer/model/Method.class
 com/example/beer/mapper/MethodMapperImpl.class
 com/example/beer/model/Hop.class
+com/example/beer/mapper/DateMapper.class
 com/example/beer/mapper/MaltMapperImpl.class
 com/example/beer/jpa/HopRepo.class
 com/example/beer/model/Volume.class
@@ -41,5 +43,4 @@ com/example/beer/jpa/MashTempRepo.class
 com/example/beer/model/Amount.class
 com/example/beer/jpa/IngredientsRepo.class
 com/example/beer/model/Ingredient.class
-com/example/beer/controller/TestController.class
 com/example/beer/mapper/FermentationMapper.class

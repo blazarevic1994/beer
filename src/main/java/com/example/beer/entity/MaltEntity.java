@@ -11,6 +11,7 @@ public class MaltEntity {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "ingredientsEntity", referencedColumnName = "id")
     private IngredientsEntity ingredientsEntity;
 
     private String name;
@@ -61,7 +62,6 @@ public class MaltEntity {
     public String toString() {
         return "MaltEntity{" +
                 "id=" + id +
-                ", ingredientsEntity=" + ingredientsEntity +
                 ", name='" + name + '\'' +
                 ", amount_value=" + amount_value +
                 ", amount_unit='" + amount_unit + '\'' +
