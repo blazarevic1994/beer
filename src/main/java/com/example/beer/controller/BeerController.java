@@ -2,19 +2,26 @@ package com.example.beer.controller;
 
 import com.example.beer.entity.*;
 import com.example.beer.jpa.BeerRepo;
+import com.example.beer.jpa.FermentationRepo;
+import com.example.beer.jpa.MashTempRepo;
 import com.example.beer.mapper.*;
 import com.example.beer.model.Beer;
+import com.example.beer.model.BeerPresentationModel;
 import com.example.beer.model.Ingredient;
 import com.example.beer.model.Method;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -36,9 +43,33 @@ public class BeerController {
     @Autowired
     private MaltMapper maltMapper;
     @Autowired
-    private BeerRepo beerRepo;
+    private BeerPresentMapper beerPresentMapper;
 
-    private List<Beer> beers = new ArrayList<>();
+    @Autowired
+    private BeerRepo beerRepo;
+    @Autowired
+    private MashTempRepo mashTempRepo;
+    @Autowired
+    private FermentationRepo fermentationRepo;
+
+
+    @GetMapping("/beers")
+    public ResponseEntity getBeers(){
+        List<BeerEntity> beerEntities = beerRepo.findAll();
+        List<BeerPresentationModel> beerPresentationModels = beerEntities.stream().map(x->mapBeerToPresentation(x)).collect(Collectors.toList());
+        return ResponseEntity.ok(beerPresentationModels);
+    }
+
+   @GetMapping("/beers/{id}")
+   public ResponseEntity getBeer(@PathVariable int id){
+       Optional<BeerEntity> beerEntity = beerRepo.findById(id);
+       if (beerEntity.isPresent())
+       {
+          BeerPresentationModel bpm = mapBeerToPresentation(beerEntity.get());
+          return ResponseEntity.ok(bpm);
+       }
+       return ResponseEntity.notFound().build();
+   }
 
     @DeleteMapping("/beers/{id}")
     public ResponseEntity deleteBeer(@PathVariable int id){
@@ -59,7 +90,6 @@ public class BeerController {
 
     @PostMapping("/fillUpListBeers")
     public ResponseEntity fillUp(@RequestBody List<Beer> beers){
-
 
        // List<BeerEntity> beerEntities = beers.stream().map(x -> beerMapper.maptoDto(x)).collect(Collectors.toList());
 
@@ -112,4 +142,12 @@ public class BeerController {
         beer.setFirst_brewed("01/"+beer.getFirst_brewed());   // dd/MM/YYYY
     }
 
+    private BeerPresentationModel mapBeerToPresentation(BeerEntity beerEntity) {
+
+        BeerPresentationModel bpm = beerPresentMapper.maptoDto(beerEntity);
+
+        bpm.setMeanMashTemperature(mashTempRepo.avgTempValue(beerEntity.getMethod()));
+        bpm.setMeanFermentationTemperature(fermentationRepo.avgTempValue(beerEntity.getMethod()));
+        return bpm;
+    }
 }
