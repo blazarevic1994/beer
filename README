@@ -1,0 +1,41 @@
+
+For my implementation I used Java with Spring Boot framework, which is very popular and naturally is to chose that him for implementation this little REST api.
+Also, I used H2 database and Hibernate framework which  mapped my entites into database tables and made dependency between tables. 
+
+You can build project with command:
+mvn clean comile -U
+Run application with command:
+mvn spring-boot:run
+
+When app is successfully started you can run curl commands:
+1. post one beer:
+
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"id":1,"name":"Brliner Wesse With Yuz - B-Sides","tagline":"Japanese Citrus Berliner Weisse.","first_brewed":"11/2015","description":"Japanese citrus fruit intensifies the sour nature of this German classic.","image_url":"https://images.punkapi.com/v2/keg.png","abv":4.2,"ibu":8,"target_fg":1007,"target_og":1040,"ebc":8,"srm":4,"ph":3.2,"attenuation_level":83,"volume":{"value":20,"unit":"litres"},"boil_volume":{"value":25,"unit":"litres"},"method":{"mash_temp":[{"temp":{"value":60,"unit":"celsius"},"duration":10},{"temp":{"value":65,"unit":"celsius"},"duration":30},{"temp":{"value":72,"unit":"celsius"},"duration":10},{"temp":{"value":78,"unit":"celsius"},"duration":5}],"fermentation":{"temp":{"value":21,"unit":"celsius"}},"twist":"Soured naturally using the kettle souring technique, Yuzu fruit: 50g at middle, Yuzu juice: 200ml at FV"},"ingredients":{"malt":[{"name":"Propino Pale Malt","amount":{"value":1.63,"unit":"kilograms"}},{"name":"Wheat Malt","amount":{"value":1.63,"unit":"kilograms"}},{"name":"Propino Pale Malt for kettle souring","amount":{"value":0.03,"unit":"kilograms"}},{"name":"Acidulated Malt for kettle souring","amount":{"value":0.03,"unit":"kilograms"}}],"hops":[{"name":"Bramling Cross","amount":{"value":10,"unit":"grams"},"add":"middle","attribute":"bitter"}],"yeast":"Wyeast 1056 - American Ale™"},"food_pairing":["Smoked chicken wings","Miso ramen","Yuzu cheesecake"],"brewers_tips":"Clean everything twice. All you want is the clean sourness of lactobacillus.","contributed_by":"Sam Mason <samjbmason>"}' \
+     http://localhost:8080/fillUpBeer
+
+2. post few beers:
+
+curl -X POST -H "Content-Type: application/json" \
+    -d '[{"id":1,"name":"Brliner Wesse With Yuz - B-Sides","tagline":"Japanese Citrus Berliner Weisse.","first_brewed":"11/2015","description":"Japanese citrus fruit intensifies the sour nature of this German classic.","image_url":"https://images.punkapi.com/v2/keg.png","abv":4.2,"ibu":8,"target_fg":1007,"target_og":1040,"ebc":8,"srm":4,"ph":3.2,"attenuation_level":83,"volume":{"value":20,"unit":"litres"},"boil_volume":{"value":25,"unit":"litres"},"method":{"mash_temp":[{"temp":{"value":60,"unit":"celsius"},"duration":10},{"temp":{"value":65,"unit":"celsius"},"duration":30},{"temp":{"value":72,"unit":"celsius"},"duration":10},{"temp":{"value":78,"unit":"celsius"},"duration":5}],"fermentation":{"temp":{"value":21,"unit":"celsius"}},"twist":"Soured naturally using the kettle souring technique, Yuzu fruit: 50g at middle, Yuzu juice: 200ml at FV"},"ingredients":{"malt":[{"name":"Propino Pale Malt","amount":{"value":1.63,"unit":"kilograms"}},{"name":"Wheat Malt","amount":{"value":1.63,"unit":"kilograms"}},{"name":"Propino Pale Malt for kettle souring","amount":{"value":0.03,"unit":"kilograms"}},{"name":"Acidulated Malt for kettle souring","amount":{"value":0.03,"unit":"kilograms"}}],"hops":[{"name":"Bramling Cross","amount":{"value":10,"unit":"grams"},"add":"middle","attribute":"bitter"}],"yeast":"Wyeast 1056 - American Ale™"},"food_pairing":["Smoked chicken wings","Miso ramen","Yuzu cheesecake"],"brewers_tips":"Clean everything twice. All you want is the clean sourness of lactobacillus.","contributed_by":"Sam Mason <samjbmason>"},{"id":2,"name":"Nektar pivo","tagline":"Japanese Citrus Berliner Weisse.","first_brewed":"11/2015","description":"Japanese citrus fruit intensifies the sour nature of this German classic.","image_url":"https://images.punkapi.com/v2/keg.png","abv":4.2,"ibu":8,"target_fg":1007,"target_og":1040,"ebc":8,"srm":4,"ph":3.2,"attenuation_level":83,"volume":{"value":20,"unit":"litres"},"boil_volume":{"value":25,"unit":"litres"},"method":{"mash_temp":[{"temp":{"value":60,"unit":"celsius"},"duration":10},{"temp":{"value":65,"unit":"celsius"},"duration":30},{"temp":{"value":72,"unit":"celsius"},"duration":10},{"temp":{"value":78,"unit":"celsius"},"duration":5}],"fermentation":{"temp":{"value":21,"unit":"celsius"}},"twist":"Soured naturally using the kettle souring technique, Yuzu fruit: 50g at middle, Yuzu juice: 200ml at FV"},"ingredients":{"malt":[{"name":"Propino Pale Malt","amount":{"value":1.63,"unit":"kilograms"}},{"name":"Wheat Malt","amount":{"value":1.63,"unit":"kilograms"}},{"name":"Propino Pale Malt for kettle souring","amount":{"value":0.03,"unit":"kilograms"}},{"name":"Acidulated Malt for kettle souring","amount":{"value":0.03,"unit":"kilograms"}}],"hops":[{"name":"Bramling Cross","amount":{"value":10,"unit":"grams"},"add":"middle","attribute":"bitter"}],"yeast":"Wyeast 1056 - American Ale™"},"food_pairing":["Smoked chicken wings","Miso ramen","Yuzu cheesecake"],"brewers_tips":"Clean everything twice. All you want is the clean sourness of lactobacillus.","contributed_by":"Sam Mason <samjbmason>"}]' \
+      http://localhost:8080/fillUpListBeers
+
+3. get beers
+curl  -X GET http://localhost:8080/beers
+
+4. get one beer
+curl  -X GET http://localhost:8080/beers/1
+
+5. delete beer
+curl -X DELETE http://localhost:8080/beers/1
+
+
+
+You also can run my junit test plan with few tests.(just right click on JunitTestPlan.java)
+Test consist of next tests:
+1. insert one beer
+2. insert beer with the same name and id (expect confilcit)
+3. get beer
+4. get beer with wrong id
+5. delete beer
+6. get again beer (expect not found)
