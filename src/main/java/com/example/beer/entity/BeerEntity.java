@@ -1,5 +1,7 @@
 package com.example.beer.entity;
 
+import org.springframework.context.annotation.Primary;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -9,11 +11,15 @@ public class BeerEntity {
     @Id
     private Integer id;
 
+    @Column(unique = true)
     private String name;
+
     private String tagline;
     private Date first_brewed;
+
     @Column(length = 1024)
     private String description;
+
     private String image_url;
     private Float abv;
     private Float ibu;

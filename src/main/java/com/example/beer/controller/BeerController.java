@@ -1,6 +1,8 @@
 package com.example.beer.controller;
 
 import com.example.beer.entity.*;
+import com.example.beer.exception.BeerAlreadyExist;
+import com.example.beer.exception.BeerNotFoundException;
 import com.example.beer.jpa.BeerRepo;
 import com.example.beer.jpa.FermentationRepo;
 import com.example.beer.jpa.MashTempRepo;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 
 @RestController
 public class BeerController {
+    public static int BAD_STATUS = -1;
     @Autowired
     private  BeerMapper beerMapper;
     @Autowired
@@ -68,7 +71,7 @@ public class BeerController {
           BeerPresentationModel bpm = mapBeerToPresentation(beerEntity.get());
           return ResponseEntity.ok(bpm);
        }
-       return ResponseEntity.notFound().build();
+       throw new BeerNotFoundException("Beer with ident "+id+" does not exist.");
    }
 
     @DeleteMapping("/beers/{id}")
@@ -81,6 +84,9 @@ public class BeerController {
     public ResponseEntity fillUp(@RequestBody Beer beer){
 
         int id = insertBeer(beer);
+        if (id == BAD_STATUS){
+            throw new BeerAlreadyExist("Beer with id "+beer.getId()+" already exist.");
+        }
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(id).toUri();
@@ -96,6 +102,9 @@ public class BeerController {
         for(int i=0; i<beers.size(); i++) {
             Beer beer = beers.get(i);
             int id = insertBeer(beer);
+            if (id == BAD_STATUS){
+                throw new BeerAlreadyExist("Beer with id "+beer.getId()+" already exist.");
+            }
         }
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.created(location).build();
@@ -105,6 +114,8 @@ public class BeerController {
 
         setStandardDateFormat(beer);
         BeerEntity beerEntity = beerMapper.maptoDto(beer);
+        if (beerRepo.findById(beerEntity.getId()).isPresent())
+            return BAD_STATUS;
 
 
         Method method = beer.getMethod();

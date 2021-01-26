@@ -3,11 +3,14 @@
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/model/Volume.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/jpa/MaltRepo.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/mapper/MaltMapper.java
+/home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/exception/BeerNotFoundException.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/entity/BeerEntity.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/jpa/FermentationRepo.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/mapper/BeerPresentMapper.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/entity/FermentationEntity.java
+/home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/exception/CustomExceptionHandler.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/mapper/DateMapper.java
+/home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/exception/ErrorResponse.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/jpa/HopRepo.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/BeerApplication.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/model/BeerPresentationModel.java
