@@ -12,6 +12,8 @@ import com.example.beer.model.Beer;
 import com.example.beer.model.BeerPresentationModel;
 import com.example.beer.model.Ingredient;
 import com.example.beer.model.Method;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,9 @@ import java.util.stream.Collectors;
 
 @RestController
 public class BeerController {
+
+    private static final Logger logger = LogManager.getLogger(BeerController.class);
+
 
     private static long MAX_BEERS = 10;
 
@@ -61,6 +66,7 @@ public class BeerController {
 
     @GetMapping("/beers")
     public ResponseEntity getBeers(){
+        logger.info("Get all beers.");
         List<BeerEntity> beerEntities = beerRepo.findAll();
         List<BeerPresentationModel> beerPresentationModels = beerEntities.stream().map(x->mapBeerToPresentation(x)).collect(Collectors.toList());
         return ResponseEntity.ok(beerPresentationModels);
@@ -68,6 +74,7 @@ public class BeerController {
 
    @GetMapping("/beers/{id}")
    public ResponseEntity getBeer(@PathVariable int id){
+       logger.info("Get beer with id ."+id+".");
        Optional<BeerEntity> beerEntity = beerRepo.findById(id);
        if (beerEntity.isPresent())
        {
@@ -79,13 +86,14 @@ public class BeerController {
 
     @DeleteMapping("/beers/{id}")
     public ResponseEntity deleteBeer(@PathVariable int id){
+        logger.info("Delete beer with id ."+id+".");
         beerRepo.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/fillUpBeer")
     public ResponseEntity fillUp(@RequestBody Beer beer){
-
+        logger.info("Insert beer: "+beer);
         int id = insertBeer(beer);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -97,8 +105,11 @@ public class BeerController {
     @PostMapping("/fillUpListBeers")
     public ResponseEntity fillUp(@RequestBody List<Beer> beers){
 
+        logger.info("Insert beer list: "+beers);
        // List<BeerEntity> beerEntities = beers.stream().map(x -> beerMapper.maptoDto(x)).collect(Collectors.toList());
-        if (beers.size()>10) throw new ValidationException("To many beers. Max beer size is 10");
+        if (beers.size()>MAX_BEERS) {
+            logger.warn("Beer list is very long. Expected max "+MAX_BEERS+".");
+            throw new ValidationException("To many beers. Max beer size is 10");}
 
         for(int i=0; i<beers.size(); i++) {
             Beer beer = beers.get(i);
@@ -113,10 +124,13 @@ public class BeerController {
         setStandardDateFormat(beer);
         BeerEntity beerEntity = beerMapper.maptoDto(beer);
 
-        if (beerRepo.findById(beerEntity.getId()).isPresent())
+        if (beerRepo.findById(beerEntity.getId()).isPresent()){
+            logger.warn("Beer with id "+beer.getId()+" already exist.");
             throw new BeerAlreadyExist("Beer with id "+beer.getId()+" already exist.");
-        else if (beerRepo.count()==MAX_BEERS)
-            throw new ValidationException("To many beers. Max beer size is "+MAX_BEERS);
+        }
+        else if (beerRepo.count()==MAX_BEERS){
+            logger.warn("Database already contains "+MAX_BEERS+" beers.");
+            throw new ValidationException("To many beers. Max beer size is "+MAX_BEERS);}
 
 
         Method method = beer.getMethod();
