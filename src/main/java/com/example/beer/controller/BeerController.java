@@ -3,6 +3,7 @@ package com.example.beer.controller;
 import com.example.beer.entity.*;
 import com.example.beer.exception.BeerAlreadyExist;
 import com.example.beer.exception.BeerNotFoundException;
+import com.example.beer.exception.ValidationException;
 import com.example.beer.jpa.BeerRepo;
 import com.example.beer.jpa.FermentationRepo;
 import com.example.beer.jpa.MashTempRepo;
@@ -28,7 +29,9 @@ import java.util.stream.Collectors;
 
 @RestController
 public class BeerController {
-    public static int BAD_STATUS = -1;
+
+    private static long MAX_BEERS = 10;
+
     @Autowired
     private  BeerMapper beerMapper;
     @Autowired
@@ -84,9 +87,6 @@ public class BeerController {
     public ResponseEntity fillUp(@RequestBody Beer beer){
 
         int id = insertBeer(beer);
-        if (id == BAD_STATUS){
-            throw new BeerAlreadyExist("Beer with id "+beer.getId()+" already exist.");
-        }
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(id).toUri();
@@ -98,13 +98,11 @@ public class BeerController {
     public ResponseEntity fillUp(@RequestBody List<Beer> beers){
 
        // List<BeerEntity> beerEntities = beers.stream().map(x -> beerMapper.maptoDto(x)).collect(Collectors.toList());
+        if (beers.size()>10) throw new ValidationException("To many beers. Max beer size is 10");
 
         for(int i=0; i<beers.size(); i++) {
             Beer beer = beers.get(i);
-            int id = insertBeer(beer);
-            if (id == BAD_STATUS){
-                throw new BeerAlreadyExist("Beer with id "+beer.getId()+" already exist.");
-            }
+            insertBeer(beer);
         }
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().build().toUri();
         return ResponseEntity.created(location).build();
@@ -114,8 +112,11 @@ public class BeerController {
 
         setStandardDateFormat(beer);
         BeerEntity beerEntity = beerMapper.maptoDto(beer);
+
         if (beerRepo.findById(beerEntity.getId()).isPresent())
-            return BAD_STATUS;
+            throw new BeerAlreadyExist("Beer with id "+beer.getId()+" already exist.");
+        else if (beerRepo.count()==MAX_BEERS)
+            throw new ValidationException("To many beers. Max beer size is "+MAX_BEERS);
 
 
         Method method = beer.getMethod();

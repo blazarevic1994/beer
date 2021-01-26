@@ -12,8 +12,10 @@
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/mapper/DateMapper.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/exception/ErrorResponse.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/jpa/HopRepo.java
+/home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/exception/ValidationException.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/BeerApplication.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/model/BeerPresentationModel.java
+/home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/exception/BeerAlreadyExist.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/jpa/MashTempRepo.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/mapper/BeerMapper.java
 /home/branimir/Documents/bane_development/github_repo/beer/src/main/java/com/example/beer/mapper/FermentationMapper.java

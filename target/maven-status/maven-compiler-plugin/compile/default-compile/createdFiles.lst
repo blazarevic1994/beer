@@ -18,6 +18,7 @@ com/example/beer/jpa/FermentationRepo.class
 com/example/beer/mapper/IngredientsMapper.class
 com/example/beer/exception/BeerNotFoundException.class
 com/example/beer/mapper/MashMapperImpl.class
+com/example/beer/exception/ValidationException.class
 com/example/beer/entity/MaltEntity.class
 com/example/beer/entity/FoodPairEntity.class
 com/example/beer/jpa/MashTempRepo.class
